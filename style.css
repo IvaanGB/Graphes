@@ -2,3 +2,7 @@ body {
     margin: auto;
     width: 1200px;
 }
+
+h2 {
+    font-size: 1.4em;
+}

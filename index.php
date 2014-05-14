@@ -35,6 +35,8 @@ include_once 'Graphes.php';
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#">Accueil</a></li>
+                  <li><a href="#dijkstra">Dijkstra</a></li>
+                  <li><a href="#kruskal">Kruskal</a></li>
                 </ul>
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -44,54 +46,66 @@ include_once 'Graphes.php';
             <div class="col-xs-12 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-beer"></i> Chemin le plus court entre chaque point</h3>
+                        <h3 class="panel-title"><i class="fa fa-beer"></i> Chemin le plus court entre chaque point <i class="close fa fa-minus" data-target="#dijkstra" data-toggle="collapse" title="Réduire"></i></h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="alert alert-warning alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <strong>Informations</strong> Utilisation de l'algorithme de Dijkstra
-                        </div>
-                        <?php
-                        foreach($graphe->getTab_noeud() as $noeud_depart) {
-                            foreach($graphe->getTab_noeud() as $noeud_arrivee) {
-                                $rc = $dij->setDepart($noeud_depart);
-                                $rc = $dij->setArrivee($noeud_arrivee);
-                                ?>
-                                <div>
-                                <?php
-                                if ($dij->recherche() && $dij->getDistance_minimale() != 0 ) {
-                                        $chemin_str = $dij->get_string_chemin();
-                                        ?><h2><?php echo($dij->getDepart()); ?> vers <?php echo($dij->getArrivee()); ?> <span class="label label-success"><?php echo($dij->getDistance_minimale()); ?></span></h2><?php
-                                        ?><p><?php echo($chemin_str); ?></p><?php
-                                }
-                                else 
-                                {
-                                    //echoln("Il n'y a pas de chemin entre " . $dij->getDepart() . " et " . $dij->getArrivee());
-                                }
-                                ?>
+                    <div id="dijkstra" class="collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="alert alert-warning alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        Utilisation de l'algorithme de <strong>Dijkstra</strong>
+                                    </div>
                                 </div>
-                                <hr>  
-                                <?php
-                            }	
-                        }?>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-3">
+                                    <?php
+                                    $mod=0;
+                                    foreach($graphe->getTab_noeud() as $noeud_depart) {
+                                        if ($mod === 4 || $mod ===8 || $mod == 12) {
+                                            echo('</div><div class="row">');
+                                        }
+                                        
+                                        if ($mod != 0) echo ('</div><div class="col-xs-12 col-md-3">');
+                                        
+                                        foreach($graphe->getTab_noeud() as $noeud_arrivee) {
+                                            $rc = $dij->setDepart($noeud_depart);
+                                            $rc = $dij->setArrivee($noeud_arrivee);
+                                            ?>
+                                            
+                                            <?php
+                                            if ($dij->recherche() && $dij->getDistance_minimale() != 0 ) {
+                                                    $chemin_str = $dij->get_string_chemin();
+                                                    ?><div><h2><?php echo($dij->getDepart()); ?> vers <?php echo($dij->getArrivee()); ?> <span class="label label-success"><?php echo($dij->getDistance_minimale()); ?></span></h2><?php
+                                                    ?><p><?php echo($chemin_str); ?></p></div><?php
+                                            }
+                                        }
+                                        $mod++;
+                                    }?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-beer"></i> Arbre couvrant minimal</h3>
+                        <h3 class="panel-title"><i class="fa fa-beer"></i> Arbre couvrant minimal <i class="close fa fa-minus" data-target="#kruskal" data-toggle="collapse" title="Réduire"></i></h3>
                     </div>
-                    <div class="panel-body">
-                        <div class="alert alert-warning alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <strong>Informations</strong> Utilisation de l'algorithme de Kruskal
-                        </div>
-                        <div>
-                            <?php                            
-                                foreach ($min_arcs as $arc => $cost) 
-                                {
-                                    echo($arc);
-                                }
-                            ?>
+                    <div id="kruskal" class="collapse in">
+                        <div class="panel-body">
+                            <div class="alert alert-warning alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Informations</strong> Utilisation de l'algorithme de <strong>Kruskal</strong>
+                            </div>
+                            <div>
+                                <?php                            
+                                    foreach ($min_arcs as $arc => $cost) 
+                                    {
+                                        echo($arc." ");
+                                    }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,7 +113,7 @@ include_once 'Graphes.php';
             <div class="col-xs-12 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><i class="fa fa-question-circle"></i> Informations sur le Graphes</h3>
+                        <h3 class="panel-title"><i class="fa fa-question-circle"></i> Informations sur le Graphe</h3>
                     </div>
                     <div class="panel-body">
                         <h2>Aperçu</h2>

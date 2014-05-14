@@ -51,8 +51,9 @@ class Graphe {
 
     function print_arcs() {
         $arcs = $this->getTab_arc();
-        foreach ($arcs as $arc)
-            echo($arc);
+        foreach ($arcs as $arc){
+            echo($arc." ");
+        }
     }
 
     // retourne un tableau de noeuds connectés au noeud spécifié par un arc du graphe, avec sa valeur
