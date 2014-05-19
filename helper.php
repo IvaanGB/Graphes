@@ -19,4 +19,11 @@ function multiplierMatrice($matriceA, $matriceB)
     return $tabRes;
 }
 
+function getLettres($indice)
+{
+    $lettres = array ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K');
+    
+    return $lettres[$indice];
+}
+
 ?>

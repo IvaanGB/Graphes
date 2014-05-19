@@ -2,6 +2,7 @@
 include_once 'Graphe.php';
 include_once 'Kruskal.php';
 
+// V1 en dur
 $n = array();
 $n[0] = new Noeud(0, 'A'); 
 $n[1] = new Noeud(1, 'B'); 
@@ -73,6 +74,13 @@ $tab_arc = array(
     new Arc($n[10], $n[9], 150), // K -> J
     new Arc($n[10], $n[4], 100) // K -> E
 );
+
+// V2 saisie
+if ($_POST)
+{
+    
+    print_r($_POST);
+}
 
 $graphe = new Graphe($n, $tab_arc);
 $dij = new Dijkstra($graphe);

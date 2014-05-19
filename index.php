@@ -43,7 +43,7 @@ include_once 'helper.php';
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-        <span class="badge"></span>
+        <?php if($_POST) { ?>
         <div class="row">
             <div class="col-xs-12 col-md-8">
                 <div class="panel panel-default">
@@ -154,5 +154,63 @@ include_once 'helper.php';
                 </div>
             </div>
         </div>
+        <?php } else { ?>
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-beer"></i> Création du graphe</h3>
+                        </div>
+                        <div id="chapeau" class="collapse in">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12">
+                                        <div class="alert alert-warning alert-dismissable">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                            Matrice des <strong>coûts</strong>
+                                        </div>
+                                        <div class="row text-center">
+                                            <div class="col-xs-1"></div>
+                                            <div class="col-xs-1"><span class="badge">A</span></div>
+                                            <div class="col-xs-1"><span class="badge">B</span></div>
+                                            <div class="col-xs-1"><span class="badge">C</span></div>
+                                            <div class="col-xs-1"><span class="badge">D</span></div>
+                                            <div class="col-xs-1"><span class="badge">E</span></div>
+                                            <div class="col-xs-1"><span class="badge">F</span></div>
+                                            <div class="col-xs-1"><span class="badge">G</span></div>
+                                            <div class="col-xs-1"><span class="badge">H</span></div>
+                                            <div class="col-xs-1"><span class="badge">I</span></div>
+                                            <div class="col-xs-1"><span class="badge">J</span></div>
+                                            <div class="col-xs-1"><span class="badge">K</span></div>
+                                        </div>
+                                        <br/>
+                                        <div class="row" >
+                                            <form method="post">
+                                                <?php for ($i=0; $i < 11; $i++) { ?>
+                                                    <?php for ($j=0; $j < 11; $j++) { ?>
+                                                        <?php if ($j == 0) { ?>
+                                                            <div class="col-xs-1 text-center"><span class="badge"><?php echo(getLettres($i)); ?></span></div>
+                                                        <?php } ?>
+                                                        <div class="col-xs-1">
+                                                            <input class="form-control input-sm" name="<?php echo($i."-".$j) ?>" id="<?php echo($i."-".$j) ?>" type="text"/>
+                                                        </div>
+                                                    <?php } ?>
+                                                        <br/><br/>
+                                                <?php } ?>
+                                                <div class="row">
+                                                    <div class="col-xs-12">
+                                                        <input type="submit" class="btn btn-default"/>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
     </body>
 </html>
