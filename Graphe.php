@@ -55,6 +55,13 @@ class Graphe {
             echo($arc." ");
         }
     }
+    
+    function print_noeuds() {
+        $noeuds = $this->getTab_noeud();
+        foreach ($noeuds as $noeud){
+            echo($noeud." ");
+        }
+    }
 
     // retourne un tableau de noeuds connectés au noeud spécifié par un arc du graphe, avec sa valeur
     // dans toutes ces méthodes il faudrait vérifier que le noeud en paramètre est bien un noeud du graphe...

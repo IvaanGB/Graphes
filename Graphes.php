@@ -3,17 +3,17 @@ include_once 'Graphe.php';
 include_once 'Kruskal.php';
 
 $n = array();
-$i = 0; $n[$i] = new Noeud($i, 'A'); 
-$i = 1; $n[$i] = new Noeud($i, 'B'); 
-$i = 2; $n[$i] = new Noeud($i, 'C'); 
-$i = 3; $n[$i] = new Noeud($i, 'D'); 
-$i = 4; $n[$i] = new Noeud($i, 'E'); 
-$i = 5; $n[$i] = new Noeud($i, 'F'); 
-$i = 6; $n[$i] = new Noeud($i, 'G'); 
-$i = 7; $n[$i] = new Noeud($i, 'H'); 
-$i = 8; $n[$i] = new Noeud($i, 'I'); 
-$i = 9; $n[$i] = new Noeud($i, 'J'); 
-$i = 10; $n[$i] = new Noeud($i, 'K'); 
+$n[0] = new Noeud(0, 'A'); 
+$n[1] = new Noeud(1, 'B'); 
+$n[2] = new Noeud(2, 'C'); 
+$n[3] = new Noeud(3, 'D'); 
+$n[4] = new Noeud(4, 'E'); 
+$n[5] = new Noeud(5, 'F'); 
+$n[6] = new Noeud(6, 'G'); 
+$n[7] = new Noeud(7, 'H'); 
+$n[8] = new Noeud(8, 'I'); 
+$n[9] = new Noeud(9, 'J'); 
+$n[10] = new Noeud(10, 'K'); 
 
 $tab_arc = array(
     // A (0) vers Autres
@@ -72,7 +72,7 @@ $tab_arc = array(
     new Arc($n[10], $n[8], 400), // K -> I
     new Arc($n[10], $n[9], 150), // K -> J
     new Arc($n[10], $n[4], 100) // K -> E
-    );
+);
 
 $graphe = new Graphe($n, $tab_arc);
 $dij = new Dijkstra($graphe);

@@ -1,6 +1,7 @@
 <?php
 include_once 'Dijkstra.php';
 include_once 'Graphes.php';
+include_once 'helper.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +36,7 @@ include_once 'Graphes.php';
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#">Accueil</a></li>
+                  <li><a href="#chapeau">Matrice Chapeau</a></li>
                   <li><a href="#dijkstra">Dijkstra</a></li>
                   <li><a href="#kruskal">Kruskal</a></li>
                 </ul>
@@ -44,6 +46,28 @@ include_once 'Graphes.php';
         <span class="badge"></span>
         <div class="row">
             <div class="col-xs-12 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-beer"></i> Matrice Chapeau <i class="close fa fa-minus" data-target="#chapeau" data-toggle="collapse" title="Réduire"></i></h3>
+                    </div>
+                    <div id="chapeau" class="collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <div class="alert alert-warning alert-dismissable">
+                                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                        Utilisation de l'algorithme de <strong>Dijkstra</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-3">
+                                    Matrice Chapeau
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-beer"></i> Chemin le plus court entre chaque point <i class="close fa fa-minus" data-target="#dijkstra" data-toggle="collapse" title="Réduire"></i></h3>
@@ -122,7 +146,7 @@ include_once 'Graphes.php';
                         </div>
                         <hr>
                         <h2>Sommets</h2>
-                        <p></p>
+                        <p><?php $graphe->print_noeuds(); ?></p>
                         <hr>
                         <h2>Arcs</h2>
                         <p><?php $graphe->print_arcs(); ?></p>
