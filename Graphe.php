@@ -10,10 +10,24 @@ class Graphe {
 
     private $tab_noeud = array();
     private $tab_arc = array();
+    private $tab_adjacence = array();
 
     function __construct(Array $n, array $a) {
         $this->tab_noeud = $n;
         $this->tab_arc = $a;
+    }
+    
+    function getTab_adjacence()
+    {
+        $arcs = $this->getTab_arc();
+        $tab_adjacence = array();
+        
+        foreach ($arcs as $arc) 
+        {
+            
+        }
+        
+        return $tab_adjacence;
     }
 
     function getTab_noeud() {

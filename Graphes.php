@@ -76,11 +76,11 @@ $tab_arc = array(
 );
 
 // V2 saisie
-if ($_POST)
+/*if ($_POST)
 {
     
     print_r($_POST);
-}
+}*/
 
 $graphe = new Graphe($n, $tab_arc);
 $dij = new Dijkstra($graphe);
@@ -88,5 +88,7 @@ $dij = new Dijkstra($graphe);
 $k = new Kruskal($graphe->getArcsAsArray());
 $min_arcs = $k->findMinimum();
 $min_cost = $k->calculateMinimumCost();
+
+//print_r($graphe->getTab_adjacence());
 
 ?>
