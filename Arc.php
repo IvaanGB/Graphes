@@ -44,7 +44,13 @@ class Arc {
     function setValeur($v) {
         $this->valeur = $v;
     }
-
+    
+    static function cmp(Arc $a, Arc $b) {
+        if ($a->valeur == $b->valeur) {
+            return 0;
+        }
+        return ($a->valeur < $b->valeur) ? -1 : 1;
+    }
 }
 
 ?>

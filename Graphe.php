@@ -1,6 +1,8 @@
 <?php
 include_once 'Noeud.php';
 include_once 'Arc.php';
+include_once 'helper.php';
+
 /**
  * Graphe
  *
@@ -10,7 +12,9 @@ class Graphe {
 
     private $tab_noeud = array();
     private $tab_arc = array();
-    private $tab_adjacence = array();
+    private $matriceCouts;
+    private $matriceAdjacence;
+    private $matriceChapeau;
 
     function __construct(Array $n, array $a) {
         $this->tab_noeud = $n;
@@ -61,6 +65,18 @@ class Graphe {
                 return $arc;
         }
         return null;
+    }
+    
+    function getMatriceCouts() {
+        return $this->matriceCouts;
+    }
+
+    function getMatriceAdjacence() {
+        return $this->matriceAdjacence;
+    }
+
+    function getMatriceChapeau() {
+        return $this->matriceChapeau;
     }
 
     function print_arcs() {
@@ -167,6 +183,45 @@ class Graphe {
             $tab[$arc->getNoeud_depart() . $arc->getNoeud_arrivee()] = $arc->getValeur();
         }
         return $tab;
+    }
+    
+    public function makeMatrices() {
+        //Matrice Couts
+        $this->matriceCouts = array();
+        $nbNoeuds = count($this->tab_noeud);
+
+        for ($i = 0; $i < $nbNoeuds; $i++) {
+            $this->matriceCouts[$i] = array();
+            for ($j = 0; $j < $nbNoeuds; $j++) {
+                $this->matriceCouts[$i][$j] = 0;
+            }
+        }
+
+        $nbArcs = count($this->tab_arc);
+        for ($i = 0; $i < $nbArcs; $i++) {
+            $this->matriceCouts[$this->tab_arc[$i]->getNoeud_depart()->getId()][$this->tab_arc[$i]->getNoeud_arrivee()->getId()] = $this->tab_arc[$i]->getValeur();
+        }
+
+        //Matrice Adjacence
+        $this->matriceAdjacence = array();
+        for ($i = 0; $i < $nbNoeuds; $i++) {
+            $this->matriceAdjacence[$i] = array();
+            for ($j = 0; $j < $nbNoeuds; $j++) {
+                if ($this->matriceCouts[$i][$j] > 0)
+                    $this->matriceAdjacence[$i][$j] = 1;
+                else
+                    $this->matriceAdjacence[$i][$j] = 0;
+            }
+        }
+
+        //Matrice Chapeau
+        $this->matriceChapeau = additionnerMatriceBoolean($this->matriceAdjacence, matriceIdentite(count($this->matriceAdjacence)));
+        $temp = NULL;
+
+        while ($temp != $this->matriceChapeau) {
+            $temp = $this->matriceChapeau;
+            $this->matriceChapeau = multiplierMatriceBoolean($this->matriceChapeau, $this->matriceChapeau);
+        }
     }
 
 }

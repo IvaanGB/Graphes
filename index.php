@@ -1,7 +1,6 @@
 <?php
 include_once 'Dijkstra.php';
 include_once 'Graphes.php';
-include_once 'helper.php';
 ?>
 
 <!DOCTYPE html>
@@ -35,10 +34,10 @@ include_once 'helper.php';
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Accueil</a></li>
-                  <li><a href="#chapeau">Matrice Chapeau</a></li>
-                  <li><a href="#dijkstra">Dijkstra</a></li>
-                  <li><a href="#kruskal">Kruskal</a></li>
+                  <li class="active"><a href="/Graphes">Accueil</a></li>
+                  <li <?php if (!$_POST) echo('class="disabled"'); ?>><a href="#chapeau">Matrice Chapeau</a></li>
+                  <li <?php if (!$_POST) echo('class="disabled"'); ?>><a href="#dijkstra">Dijkstra</a></li>
+                  <li <?php if (!$_POST) echo('class="disabled"'); ?>><a href="#kruskal">Kruskal</a></li>
                 </ul>
               </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -46,6 +45,39 @@ include_once 'helper.php';
         <?php if($_POST) { ?>
         <div class="row">
             <div class="col-xs-12 col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><i class="fa fa-beer"></i> Matrice des couts et d'adjacence <i class="close fa fa-minus" data-target="#cout" data-toggle="collapse" title="Réduire"></i></h3>
+                    </div>
+                    <div id="cout" class="collapse in">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <h2>Matrice des couts</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <?php
+                                        afficherMatrice($graphe->getMatriceCouts(), $graphe->getTab_noeud());
+                                    ?>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <h2>Matrice d'adjacence</h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12">
+                                    <?php
+                                        afficherMatrice($graphe->getMatriceAdjacence(), $graphe->getTab_noeud());
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><i class="fa fa-beer"></i> Matrice Chapeau <i class="close fa fa-minus" data-target="#chapeau" data-toggle="collapse" title="Réduire"></i></h3>
@@ -61,8 +93,8 @@ include_once 'helper.php';
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-xs-12 col-md-3">
-                                    Matrice Chapeau
+                                <div class="col-xs-12 col-md-12">
+                                    <?php afficherMatrice($graphe->getMatriceChapeau(), $graphe->getTab_noeud()); ?>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +224,7 @@ include_once 'helper.php';
                                                             <div class="col-xs-1 text-center"><span class="badge"><?php echo(getLettres($i)); ?></span></div>
                                                         <?php } ?>
                                                         <div class="col-xs-1">
-                                                            <input class="form-control input-sm" name="<?php echo($i."-".$j) ?>" id="<?php echo($i."-".$j) ?>" type="text"/>
+                                                            <input class="form-control input-sm" name="<?php echo('couts['.$i.']['.$j.']') ?>" id="<?php echo('couts['.$i.']['.$j.']') ?>" type="text"/>
                                                         </div>
                                                     <?php } ?>
                                                         <br/><br/>

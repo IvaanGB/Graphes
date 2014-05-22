@@ -29,6 +29,7 @@ $tab_arc = array(
     
     // C (2) vers Autres
     new Arc($n[2], $n[1], 130), // C -> B
+    new Arc($n[2], $n[3], 450), // C -> D
     new Arc($n[2], $n[0], 230), // C -> A
     new Arc($n[2], $n[6], 110), // C -> G
     new Arc($n[2], $n[7], 150), // C -> H
@@ -78,12 +79,27 @@ $tab_arc = array(
 // V2 saisie
 /*if ($_POST)
 {
-    
     print_r($_POST);
+    
+    // Création des noeuds
+    for ($i = 0; $i < 11; $i++)
+    {
+        $n[$i] = new Noeud($i, getLettres($i)); 
+    }
+    
+    // Création de la matrice des couts
+    foreach ($_POST['matrice'] as $coutsLignes) 
+    {
+        foreach ($coutsLignes as $cout) 
+        {
+            
+        }
+    }
 }*/
 
 $graphe = new Graphe($n, $tab_arc);
 $dij = new Dijkstra($graphe);
+$graphe->makeMatrices();
 
 $k = new Kruskal($graphe->getArcsAsArray());
 $min_arcs = $k->findMinimum();
